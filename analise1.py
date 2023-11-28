@@ -17,7 +17,6 @@ print("\n\nTabela Filtrada: Name | Plataform | Global_Sales\n")
 print(name_platform_global)
 
 # Agrupar por título do jogo e somar as vendas globais
-
 nova_tabela_agrupada = name_platform_global.groupby('Name').agg({'Platform': 'count', 'Global_Sales': 'sum'}).reset_index()
 
 # Exibir a nova tabela agrupada
@@ -25,12 +24,11 @@ print("\n\nTabela Filtrada Agrupada : Name | Plataform (em número) | Global_Sal
 print(nova_tabela_agrupada)
 
 # Ordenar a tabela pela quantidade de vendas globais em ordem decrescente
-print("\n\nTabela Filtrada Agrupada em Ordem Crescente: Name | Plataform (em número) | Global_Sales (acumulado)\n")
 nova_tabela_agrupada = nova_tabela_agrupada.sort_values(by='Global_Sales', ascending=False)
 
 # Exibir a tabela ordenada
+print("\n\nTabela Filtrada Agrupada em Ordem: Name | Plataform (em número) | Global_Sales (acumulado)\n")
 print(nova_tabela_agrupada)
-
 
 
 
