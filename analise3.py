@@ -154,48 +154,44 @@ plt.xticks(rotation=45, ha='right')  # Rotacionar os rótulos do eixo x para mel
 plt.show()
 #-------------------------------------------------------------------------------------------
 
+# ANÁLISE DE REGRESSÃO MULTIPLA
+# a variável dependente (ou resposta) seria Global_Sales, e as variáveis independentes (ou preditoras) seriam Publisher, Platform e Genre.
+# Convert the 'Genre' column to a numerical dtype
+dataframe['Genre'] = dataframe['Genre'].astype('category').cat.codes
 
-# Lista de variáveis categóricas para análise
-categorical_variables = ['Platform', 'Genre', 'Publisher']
+# Convert the 'Platform' column to a numerical dtype
+dataframe['Platform'] = dataframe['Platform'].astype('category').cat.codes
 
-# Loop para realizar o teste qui-quadrado entre todas as combinações possíveis
-for var1, var2 in combinations(categorical_variables, 2):
-    contingency_table = pd.crosstab(index=dataframe[var1], columns=dataframe[var2])
-    print(contingency_table)
-    chi2_stat, p_value, _, _ = chi2_contingency(contingency_table)
-    
-    # Exibição dos resultados para cada par de variáveis
-    print(f'Teste Qui-Quadrado entre {var1} e {var2}:')
-    print('Estatística Qui-Quadrado:', chi2_stat)
-    print('Valor p do Teste Qui-Quadrado:', p_value)
-    alpha_chi2 = 0.05
-    if p_value < alpha_chi2:
-        print('Rejeitar H0: Há evidências de associação significativa.')
-    else:
-        print('Não rejeitar H0: Não há evidências suficientes para afirmar associação significativa.')
-    print('\n')
+# Convert the 'Publisher' column to a numerical dtype
+dataframe['Publisher'] = dataframe['Publisher'].astype('category').cat.codes
+
+# Create the OLS model
+model = sm.OLS(dataframe['Global_Sales'], dataframe[['Genre', 'Platform', 'Publisher']])
+
+# Estimate the model
+model = model.fit()
+
+# Display the results
+print(model.summary())
+
+#---------------------------------------------------------------------------------------------
 
 
-# Os resultados indicam que em cada teste qui-quadrado entre pares de variáveis (Plataforma e Gênero, Plataforma e Produtora, Gênero e Produtora), 
-# você rejeitou a hipótese nula (H0) em todos os casos. Isso sugere que há evidências estatísticas de uma associação significativa entre as variáveis testadas.
+# No modelo de regressão linear que você ajustou, os coeficientes para as variáveis 'Genre', 'Platform' e 'Publisher' 
+# indicam a variação média em 'Global_Sales' associada a uma unidade de mudança nessas variáveis, mantendo as outras 
+# variáveis constantes.
 
-# A interpretação específica para cada par seria:
+# A interpretação dos coeficientes no seu caso seria a seguinte:
+# Para uma unidade adicional na variável 'Genre', esperamos um aumento médio de 0.0232 nas vendas globais, mantendo 'Platform' e 'Publisher' constantes.
+# Para uma unidade adicional na variável 'Platform', esperamos um aumento médio de 0.0140 nas vendas globais, mantendo 'Genre' e 'Publisher' constantes.
+# Para uma unidade adicional na variável 'Publisher', esperamos um aumento médio de 0.0006 nas vendas globais, mantendo 'Genre' e 'Platform' constantes.
 
-# Plataforma e Gênero:
+# Portanto, com base nos coeficientes, a variável que parece ter um impacto mais significativo nas vendas globais é 'Genre', seguida por 'Platform' e 'Publisher'. 
+# No entanto, é importante observar que a interpretação dos coeficientes depende da escala das variáveis. Certifique-se de considerar a escala das variáveis ao 
+# interpretar os resultados.
+# Lembre-se também de que a interpretação causal em um modelo de regressão observacional como este pode ser desafiadora. Os resultados podem indicar associações, 
+# mas não necessariamente causalidade.
 
-# Estatística Qui-Quadrado: 5909.98
-# Valor p: 0.0 (muito próximo de zero)
-# Conclusão: Há evidências de associação significativa entre as Plataformas e Gêneros dos jogos.
-# Plataforma e Produtora:
 
-# Estatística Qui-Quadrado: 73562.08
-# Valor p: 0.0 (muito próximo de zero)
-# Conclusão: Há evidências de associação significativa entre as Plataformas e Produtoras dos jogos.
-# Gênero e Produtora:
-
-# Estatística Qui-Quadrado: 25587.35
-# Valor p: 0.0 (muito próximo de zero)
-# Conclusão: Há evidências de associação significativa entre os Gêneros e Produtoras dos jogos.
-# Em resumo, os resultados sugerem que as escolhas de Plataformas, Gêneros e Produtoras estão associadas 
-# entre si nos dados analisados. Isso pode indicar que as preferências dos jogadores, estratégias de marketing ou 
-# outros fatores estão influenciando as vendas de jogos de maneira conjunta em relação a essas variáveis.
+# Portanto, a análise de regressão múltipla permitiria avaliar como as editoras (Publisher), plataformas (Platform) e gêneros (Genre) contribuem para as vendas 
+# globais de jogos, e ajudaria a identificar quais dessas variáveis são mais importantes na explicação das variações nas vendas globais.
