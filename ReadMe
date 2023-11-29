@@ -1,4 +1,4 @@
----------------------------------PRIMEIRA CORRELAÇÃO-------------------------------------------------------------------------------------------------------------------
+---------------------------------PRIMEIRA ANÁLISE-------------------------------------------------------------------------------------------------------------------
 
 A correlação de Pearson entre a quantidade de plataformas (Platform) e as vendas globais (Global_Sales) é aproximadamente 0.335, 
 e o p-value associado é muito próximo de zero (3.809070294959473e-299). Vamos interpretar esses resultados:
@@ -15,4 +15,31 @@ plataformas causa um aumento nas vendas globais.
 Além disso, a força da correlação (0.335) indica que outros fatores também podem influenciar as vendas globais, e a quantidade de plataformas explica apenas parte 
 dessa variação. Considere a possibilidade de explorar outras variáveis que podem influenciar as vendas globais para obter uma compreensão mais completa do cenário.
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------SEGUNDA ANÁLISE-------------------------------------------------------------------------------------------------------------------
+Vamos interpretar os resultados obtidos:
+
+Tabela de Contingência:
+
+A tabela de contingência mostra a distribuição das vendas globais para diferentes valores agrupados por publicadora. Cada célula representa o número de jogos 
+vendidos (em milhões) para uma combinação específica de publicadora e vendas globais. Por exemplo, a célula em "10TACLE Studios" e "0.01" indica que há 1 jogo 
+dessa publicadora com vendas globais de 0.01 milhão.
+Teste Qui-Quadrado:
+
+O teste qui-quadrado é uma análise estatística que avalia a independência entre duas variáveis categóricas. Neste caso, o p-valor é muito alto (1.0), o que sugere 
+que não há evidência estatística para rejeitar a hipótese nula de que as vendas globais e as publicadoras são independentes. Isso pode indicar que as vendas globais 
+não são significativamente afetadas pela escolha da publicadora.
+
+Nova Tabela - Média de Vendas Globais por Publicadora:
+Essa tabela mostra a média das vendas globais para cada publicadora. Por exemplo, em média, os jogos da publicadora "20th Century Fox Video Games" têm vendas 
+globais de 0.388 milhões.
+
+Visualização - Média de Vendas Globais por Publicadora (Top 10):
+O gráfico de barras mostra as 10 primeiras publicadoras com base na média de vendas globais. Cada barra representa a média de vendas globais para uma publicadora específica. 
+Este gráfico pode ajudar a identificar as publicadoras com as maiores médias de vendas globais.
+
+Em resumo, os resultados indicam que não há uma associação significativa entre as vendas globais e a escolha da publicadora, conforme o teste qui-quadrado. No entanto, a forte 
+correlação positiva entre as vendas na América do Norte e as vendas globais sugere que as vendas nessa região estão fortemente relacionadas às vendas globais. A nova tabela e o 
+gráfico de barras fornecem uma visão mais detalhada das médias de vendas globais por publicadora.
+
+
